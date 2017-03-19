@@ -18,6 +18,8 @@ try:
 except:
     print("expected aligned images directory, see README")
 
+print("first image at " + str(image_locs[0]))
+
 total_imgs = len(image_locs)
 print("found %i images in directory" %total_imgs)
 
@@ -31,10 +33,10 @@ def process_image(im):
     #new_size = [i/4 for i in im.size]
     im.thumbnail(new_size, Image.ANTIALIAS)
     input = np.array(im)
-    y = random.randint(0, 2 * (input.shape[0] / 3))
-    x = random.randint(0, 2 * (input.shape[1] / 3))
-    dy = random.randint(10, input.shape[0] / 3)
-    dx = random.randint(10, input.shape[1] / 3)
+    y = random.randint(0, (int) (2 * (input.shape[0] / 3)))
+    x = random.randint(0, (int) (2 * (input.shape[1] / 3)))
+    dy = random.randint(10, (int)(input.shape[0] / 3))
+    dx = random.randint(10, (int)(input.shape[1] / 3))
     input[y:y + dy, x:x + dx] = np.array([255, 255, 255])
     return input, target
 
@@ -42,12 +44,13 @@ def process_image(im):
 def proc_loc(loc):
     try:
         i = Image.open(loc)
+        #print("open image " + str(i));
         input, target = process_image(i)
         return (input, target)
     except KeyboardInterrupt:
         raise
-    except:
-        return None
+    #except:
+    #    return None
 
 
 try:
@@ -83,9 +86,11 @@ for i in tqdm(range(num_iter)):
 
     a = time()
     locs = image_locs[i * batch_size : (i + 1) * batch_size]
+    #print("location is at " + str(locs))
 
     proc =  [proc_loc(loc) for loc in locs]
-
+    #if i == 0:
+    #    print("proc is at " + str(proc[0]))
     for pair in proc:
         if pair is not None:
             input, target = pair
@@ -94,6 +99,9 @@ for i in tqdm(range(num_iter)):
 
     X_in = np.array(X_in)
     X_ta = np.array(X_ta)
+    #if i == 0:
+    #    print(X_in)
+    #    print(X_ta)
 
     dset_i.resize((insert_point + len(X_in),160,128,3))
     dset_t.resize((insert_point + len(X_in),160,128,3))
