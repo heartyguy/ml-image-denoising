@@ -50,10 +50,11 @@ def psnr(dataset1, dataset2, maximumDataValue, ignore=None):
    return 10.0 * numpy.log10(maximumDataValue**2 / meanSquaredError)
 
 
-def bicubic_interpolate(image_np):
-    image_arr = numpy.asarray(image_np)
-    red = image_arr[:][:][0]
-    green = image_arr[:][:][1]
-    blue = image_arr[:][:][2]
-    scipy.interpolate.interp2d()
-   
+def image_interpolate(image_np, pil_sample_opt):
+    return numpy.array(Image.fromarray(image_np.astype(numpy.uint8)).resize((128,160), resample=pil_sample_opt))
+
+def bulk_image_interpolate(image_np_array, pil_sample_opt):
+    ret_array = []
+    for image_np in image_np_array:
+        ret_array.append( image_interpolate(image_np, pil_sample_opt))
+    return ret_array
