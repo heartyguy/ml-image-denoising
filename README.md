@@ -6,6 +6,10 @@
 
 A comprehensive suite of image denoising techniques, from classical statistical methods to state-of-the-art deep learning models. This repository provides implementations and comparisons of Principal Component Analysis (PCA), Non-negative Matrix Factorization (NMF), Singular Value Decomposition (SVD), Spectral Decomposition, Convolutional Neural Networks (CNN), and a Generative Adversarial Denoising Autoencoder (GAN-DAE).
 
+![image](https://github.com/user-attachments/assets/b751f5d2-278b-4878-b98f-550bd250466f)
+![image](https://github.com/user-attachments/assets/6561cabe-21a2-43dc-85bc-7c861cce56f1)
+
+
 ## 🎯 Overview
 
 Image denoising is a fundamental problem in computer vision and image processing. This project serves as both a practical toolkit and an educational resource for understanding and comparing various denoising methodologies across traditional and modern approaches.
